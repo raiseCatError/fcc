@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# Environment/secrets
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build/package files
+build/
+dist/
+*.egg-info/
