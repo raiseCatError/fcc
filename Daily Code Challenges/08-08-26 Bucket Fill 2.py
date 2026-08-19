@@ -12,6 +12,7 @@ def bucket_fill(grid, target_color):
     counter = 0
 
     def fill(i, j, original_color):
+
         if i < 0 or i >= len(grid):
             return
 
@@ -24,35 +25,6 @@ def bucket_fill(grid, target_color):
         if grid[i][j] != original_color:
             return
 
-        # # Below
-        # if i + 1 < len(grid):
-        #     if (i + 1, j) not in visited and grid[i + 1][j] == original_color:
-        #         visited.add((i + 1, j))
-        #         grid[i + 1][j] = target_color
-        # # Above
-        # if i - 1 >= 0:
-        #     if (i - 1, j) not in visited and grid[i - 1][j] == original_color:
-        #         visited.add((i - 1, j))
-        #         grid[i - 1][j] = target_color
-
-        # # Right
-        # if j + 1 < len(grid[i]):
-        #     if (i, j + 1) not in visited and grid[i][j + 1] == original_color:
-        #         visited.add((i, j + 1))
-        #         grid[i][j + 1] = target_color
-
-        # # Left
-        # if j - 1 >= 0:
-        #     if (i, j - 1) not in visited and grid[i][j - 1] == original_color:
-        #         visited.add((i, j - 1))
-        #         grid[i][j - 1] = target_color
-
-        
-        # if (i, j) not in visited and grid[i][j] == original_color:
-        #     visited.add((i, j))
-        #     grid[i][j] = target_color
-
-
         visited.add((i, j))
         grid[i][j] = target_color
 
@@ -63,21 +35,17 @@ def bucket_fill(grid, target_color):
                 
 
     for i, x in enumerate(grid):
-    # print('i',i)
+
         for j, y in enumerate(x):
-            # print('x',x,'y',y,'i',i,'j',j)
+
             if (i, j) not in visited and grid[i][j] != target_color:
-                # grid[i][j] = target_color
+
                 counter += 1
                 original_color = grid[i][j]
                 fill(i, j, original_color)
                 
-
-
-    # print(visited)
-    print(counter)
-
     return counter
+
 
 bucket_fill([["G", "Y", "Y"], ["G", "Y", "G"], ["Y", "Y", "G"]], "R")
 
