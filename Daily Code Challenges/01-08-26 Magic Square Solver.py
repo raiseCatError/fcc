@@ -7,13 +7,6 @@
 
 def solve_magic_square(grid):
 
-    # Grid
-    # grid = [
-    #     [2, 7, 6], 
-    #     [9, 0, 1], 
-    #     [4, 3, 8]
-    #     ]
-
     # Columns
     col0 = {(0,0), (1, 0), (2, 0)}
     col1 = {(0,1), (1, 1), (2, 1)}
@@ -28,89 +21,106 @@ def solve_magic_square(grid):
     dia0 = {(0,0), (1,1), (2, 2)}
     dia1 = {(0,2), (1,1), (2, 0)}
 
-    s = 0
-    s2 = 0
-    
-    r = 0
-    r2 = 0
+    v0 = 0
+    v1 = 0
+    v2 = 0
 
-    # Gosh, I need to freakin add a way to store the 0,and then check every row/column/diagonal, goanna do it later if this bruteforce works lmao
+    h0 = 0
+    h1 = 0
+    h2 = 0
 
-    # Update: decided to scratch this, and rebuild code lmaoo this is horrendus to look at...
-
+    d0 = 0
+    d1 = 0
 
     for i, x in enumerate(grid):
         for ii, y in enumerate(x):
 
             if grid[i][ii] == 0:
-
+                
                 if (i, ii) in col0:              
                     for c1, c2 in col1:
-                        s += grid[c1][c2]
+                        v0 += grid[c1][c2]
                     
                     for c1, c2 in col2:
-                        s2 += grid[c1][c2]
+                        v1 += grid[c1][c2]
 
-                    if s != s2:
+                    if v0 != v1:
                         return "impossible"
 
-                    variable = s   
+                    variable = v0   
                     checker = 0       
                     for c1, c2 in col0:
                         variable -= grid[c1][c2]
                         checker += grid[c1][c2]
 
-                    if variable + checker == s:
-                        return variable
-                    elif variable + checker != s:
-                        return "impossible"
+                    v2 = variable + checker
+
+                #
 
                 elif (i, ii) in col1:
                     for c1, c2 in col0:
-                        s += grid[c1][c2]
+                        v0 += grid[c1][c2]
                     
                     for c1, c2 in col2:
-                        s2 += grid[c1][c2]
+                        v1 += grid[c1][c2]
 
-                    if s != s2:
+                    if v0 != v1:
                         return "impossible"
                     
-                    variable = s   
+                    variable = v0   
                     checker = 0       
                     for c1, c2 in col1:
                         variable -= grid[c1][c2]
                         checker += grid[c1][c2]
 
-                    if variable + checker == s:
-                        return variable
-                    elif variable + checker != s:
-                        return "impossible"
+                    v2 = variable + checker
+
+                #
 
                 elif (i, ii) in col2:
                     for c1, c2 in col0:
-                        s += grid[c1][c2]
+                        v0 += grid[c1][c2]
                     
                     for c1, c2 in col1:
-                        s2 += grid[c1][c2]
+                        v1 += grid[c1][c2]
 
-                    if s1 != s2:
+                    if v0 != v1:
                         return "impossible"
 
-                    variable = s   
+                    variable = v0   
                     checker = 0       
                     for c1, c2 in col2:
                         variable -= grid[c1][c2]
                         checker += grid[c1][c2]
+                    
+                    v2 = variable + checker
 
-                    if variable + checker == s:
-                        return variable
-                    elif variable + checker != s:
-                        return "impossible"
+                grid[i][ii] = variable
+
+                # Rows
+                for r1, r2 in row0:
+                    h0 += grid[r1][r2]
+                for r1, r2 in row1:
+                    h1 += grid[r1][r2]
+                for r1, r2 in row2:
+                    h2 += grid[r1][r2]
+
+                # Diagonals
+                for x1, x2 in dia0:
+                    d0 += grid[x1][x2]
+                for x1, x2 in dia1:
+                    d1 += grid[x1][x2]
+                
+                # Checkpoint
+                if v0 == v1 == v2 == h0 == h1 == h2 == d0 == d1:
+                    return variable
+                else:
+                    return 'impossible'
+
+# FIXME: This square is currently more magical than I am.
 
 # solve_magic_square([[2, 7, 6], [9, 0, 1], [4, 3, 8]])
-solve_magic_square([[12, 17, 16], [19, 0, 10], [14, 13, 18]]) 
+# solve_magic_square([[12, 17, 16], [19, 0, 10], [14, 13, 18]]) 
 # solve_magic_square([[0, 14, 12], [18, 10, 2], [8, 6, 16]])
 # solve_magic_square([[15, 35, 31], [43, 27, 11], [23, 19, 0]])
 # solve_magic_square([[26, 41, 14], [47, 35, 0], [32, 29, 44]])
-
-
